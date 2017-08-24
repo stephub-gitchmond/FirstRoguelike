@@ -1,3 +1,6 @@
+# TODO: not currently used
+
+
 class Action(object):
     def __init__(self, actor):
         self.actor = actor
@@ -22,9 +25,9 @@ class MoveOrAttack(Action):
 
         # get an attackable object on target tile
         objs = leveldata.get_objects(self.tx, self.ty)
-        attackables = list(filter(lambda o: o.fighter is not None, objs))
+        attackables = [o for o in objs if o.fighter]
 
-        if len(attackables) == 0 and self.actor.fighter:
+        if len(attackables) > 0 and self.actor.fighter:
             self.action = 'attack'
             self.target = attackables[0]
         elif leveldata.is_passable(self.tx, self.ty):
