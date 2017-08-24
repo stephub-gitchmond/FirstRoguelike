@@ -12,21 +12,29 @@ import rlmsglog
 import rlitems
 
 
-def handle_input(key, mouse, game_state):
+def handle_input(key, mouse, game_state, leveldata, con):
+    # TODO remove con from params
     """ Handles user input. Returns True if the player has taken a turn """
 
     if key.vk == ltc.KEY_ENTER and key.lalt:
         # alt+enter toggles fullscreen
         ltc.console_set_fullscreen(not ltc.console_is_fullscreen())
         return False
-    elif key.vk == ltc.KEY_ESCAPE:
-        # escape exits
+
+    elif key.vk == ltc.KEY_F4 and key.alt:
+        # exit
         global should_exit
         should_exit = True
         return False
 
-    # otherwise, player takes an action
-    if game_state is GS_PLAYING:
+    elif chr(key.c) == 'i':
+        guiutils.draw_inventory_menu(con,
+                                     leveldata.player,
+                                     SCREEN_WIDTH - 30,
+                                     SCREEN_WIDTH, SCREEN_HEIGHT)
+
+    elif game_state is GS_PLAYING:
+        # otherwise, player takes an action
         return rlplayer.handle_key(key)
 
 
@@ -150,7 +158,7 @@ def main():
 
         # handle user input
         # noinspection PyTypeChecker
-        player_taken_turn = handle_input(key, mouse, game_state)
+        player_taken_turn = handle_input(key, mouse, game_state, leveldata, con)
 
         if should_exit:
             break

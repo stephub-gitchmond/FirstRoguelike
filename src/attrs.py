@@ -101,8 +101,8 @@ class Item(object):
 
 
 class Inventory(object):
-    def __init__(self):
-        self.itemlist = []
+    def __init__(self, itemlist=[]):
+        self.itemlist = itemlist
 
     def add_item(self, obj):
         """ Add and rlutils.Object to this inventory.
