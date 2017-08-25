@@ -30,7 +30,8 @@ class Object(object):
         self.fighter = None
         self.ai = None
         self.inventory = None
-        self.item = None
+        self.carryable = None
+        self.usable = None
 
     def move(self, dx, dy):
         self.x += dx

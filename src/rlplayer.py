@@ -15,35 +15,32 @@ pas = {ltc.KEY_UP: 'PA_UP',
        ltc.KEY_SPACE: 'PA_SKIP',
        'g': 'PICK_UP'}
 
-pa = None  # player action
 
-
-def handle_key(key):
+def handle_key(key, player):
     """ Chooses the player action based on the keypress.
         Returns true if the keypress has been handled """
-    global pa
     if key.vk in pas:
-        pa = pas[key.vk]
+        player.action = pas[key.vk]
         return True
     if chr(key.c) in pas:
-        pa = pas[chr(key.c)]
+        player.action = pas[chr(key.c)]
         return True
     else:
-        pa = None
+        player.action = None
         return False
 
 
 def handle_player_action(player, leveldata):
     """ Takes action based on the 'pa' flag """
-    if pa == 'PA_UP':
+    if player.action == 'PA_UP':
         move_or_attack(player, leveldata, 0, -1)
-    elif pa == 'PA_DOWN':
+    elif player.action == 'PA_DOWN':
         move_or_attack(player, leveldata, 0, 1)
-    elif pa == 'PA_LEFT':
+    elif player.action == 'PA_LEFT':
         move_or_attack(player, leveldata, -1, 0)
-    elif pa == 'PA_RIGHT':
+    elif player.action == 'PA_RIGHT':
         move_or_attack(player, leveldata, 1, 0)
-    elif pa == 'PICK_UP':
+    elif player.action == 'PICK_UP':
         pickup_item(player, leveldata)
 
 
@@ -69,10 +66,10 @@ def pickup_item(player, leveldata):
         objs = leveldata.get_objects_at(player.x, player.y)
 
         # get objects that have the 'item' attribute
-        items = [obj for obj in objs if obj.item]
+        items = [obj for obj in objs if obj.carryable]
         if len(items) > 0:
             item = items[0]
-            success, msg = player.inventory.add_item(item)
+            success, msg = player.inventory.add(item)
 
             if success:
                 rlmsglog.m('Picked up ' + item.name)

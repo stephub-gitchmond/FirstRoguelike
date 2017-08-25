@@ -47,6 +47,7 @@ class BasicMonsterAI(AI):
 class PlayerAI(AI):
     def __init__(self):
         AI.__init__(self)
+        self.action = None
 
     def take_turn(self, owner, leveldata):
         src.rlplayer.handle_player_action(owner, leveldata)

@@ -1,6 +1,7 @@
 import rlutils
 from attrs.fg import *
-from attrs.item import *
+from attrs.usable import *
+from attrs.carryable import *
 from libtcod import libtcodpy as ltc
 
 MAX_ROOM_ITEMS = 2
@@ -11,7 +12,8 @@ def create_healing_potion(x, y):
                         x, y,
                         BasicFg('!', ltc.violet),
                         blocks=False)
-    hp.item = Item()
+    hp.usable = HealingPotion()
+    hp.carryable = Carryable()
     return hp
 
 

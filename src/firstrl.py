@@ -35,7 +35,7 @@ def handle_input(key, mouse, game_state, leveldata, con):
 
     elif game_state is GS_PLAYING:
         # otherwise, player takes an action
-        return rlplayer.handle_key(key)
+        return rlplayer.handle_key(key, leveldata.player)
 
 
 def draw_level(con, leveldata):
