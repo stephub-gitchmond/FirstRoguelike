@@ -1,7 +1,11 @@
 import rlmobs
 import rlutils
-import attrs
 import rlmsglog
+from attrs.ai import *
+from attrs.bg import *
+from attrs.fg import *
+from attrs.fighter import *
+from attrs.inventory import *
 from libtcod import libtcodpy as ltc
 
 pas = {ltc.KEY_UP: 'PA_UP',
@@ -84,9 +88,9 @@ def player_death(player, leveldata):
 def create_player(x, y):
     p = rlutils.Object('Player',
                        x, y,
-                       attrs.BasicFg('@', ltc.white),
-                       attrs.WoundIndicatorBg())
-    p.fighter = attrs.Fighter(max_hp=30, defence=2, power=5, death_func=player_death)
-    p.ai = attrs.PlayerAI()
-    p.inventory = attrs.Inventory()
+                       BasicFg('@', ltc.white),
+                       WoundIndicatorBg())
+    p.fighter = Fighter(max_hp=30, defence=2, power=5, death_func=player_death)
+    p.ai = PlayerAI()
+    p.inventory = Inventory()
     return p

@@ -1,5 +1,6 @@
 import rlutils
-import attrs
+from attrs.fg import *
+from attrs.item import *
 from libtcod import libtcodpy as ltc
 
 MAX_ROOM_ITEMS = 2
@@ -8,9 +9,9 @@ MAX_ROOM_ITEMS = 2
 def create_healing_potion(x, y):
     hp = rlutils.Object('Healing Potion',
                         x, y,
-                        attrs.BasicFg('!', ltc.violet),
+                        BasicFg('!', ltc.violet),
                         blocks=False)
-    hp.item = attrs.Item()
+    hp.item = Item()
     return hp
 
 

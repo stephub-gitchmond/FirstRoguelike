@@ -1,5 +1,8 @@
 import rlutils
-from attrs import *
+from attrs.ai import *
+from attrs.bg import *
+from attrs.fg import *
+from attrs.fighter import *
 
 MAX_ROOM_ENEMIES = 3
 
