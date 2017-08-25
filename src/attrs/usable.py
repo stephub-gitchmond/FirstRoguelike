@@ -22,6 +22,8 @@ class HealingPotion(Usable):
         user.fighter.hp += 15
         remove_from_inv(owner, user)
 
+        return 'True', "You feel better!"
+
 
 def remove_from_inv(obj, user):
     if user.inventory and user.inventory.has(obj):

@@ -8,7 +8,7 @@ import leveltools
 import rlmobs
 import rlplayer
 import guiutils
-import rlmsglog
+import src.rlmsglog
 import rlitems
 
 
@@ -67,11 +67,10 @@ def draw_gui(gui_panel, con, leveldata, mouse):
                       leveldata.player.fighter.hp, leveldata.player.fighter.max_hp,
                       ltc.light_red, ltc.dark_red)
     guiutils.draw_panel_border(gui_panel, PANEL_WIDTH, PANEL_HEIGHT)
-    rlmsglog.msg_log.draw_log(gui_panel, MSG_LOG_X, MSG_LOG_Y, MSG_LOG_W, MSG_LOG_H)
+    src.rlmsglog.msg_log.draw_log(gui_panel, MSG_LOG_X, MSG_LOG_Y, MSG_LOG_W, MSG_LOG_H)
 
     objs_under_mouse = guiutils.get_names_at_loc(leveldata, mouse.cx, mouse.cy)
-    ltc.console_set_default_foreground(con, ltc.white)
-    ltc.console_print_ex(con, 0, 0, ltc.BKGND_NONE, ltc.LEFT, objs_under_mouse)
+    guiutils.dotext(con, 0, 0, objs_under_mouse)
 
 
 def clear_console(con):
@@ -128,7 +127,7 @@ def main():
     rlmobs.populate_enemies(leveldata)
     rlitems.populate_items(leveldata)
 
-    rlmsglog.m('Welcome to the dungeon!')
+    src.rlmsglog.m('Welcome to the dungeon!')
 
     # game state
     game_state = GS_PLAYING

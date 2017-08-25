@@ -11,9 +11,9 @@ class Inventory(object):
         if not obj.carryable:
             return False, "Can't pick up " + obj.name
         if len(self.itemlist) >= 26:
-            return False, 'Inventory full!'
+            return False, '$orange$Inventory full!$stop$'
         self.itemlist.append(obj)
-        return True, ''
+        return True, 'Picked up ' + obj.name
 
     def remove(self, obj):
         if self.has(obj):

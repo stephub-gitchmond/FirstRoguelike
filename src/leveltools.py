@@ -13,6 +13,8 @@ MAX_ROOMS = 30
 
 
 class LevelData:
+    """ Big bag of data about the level """
+
     def __init__(self, w, h, level, rooms, objects=None, player=None):
         self.w = w
         self.h = h

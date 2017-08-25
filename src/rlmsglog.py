@@ -1,8 +1,8 @@
+import guiutils
 from libtcod import libtcodpy as ltc
-import textwrap
 
 
-class MessageLog:
+class MessageLog(object):
     """ A list of messages. Can draw those messages to a w*h area of a console. """
 
     def __init__(self):
@@ -13,14 +13,12 @@ class MessageLog:
 
     def draw_log(self, con, x, y, w, h):
         last_msgs = self.msgs[-h:]  # last h messages
-        last_lines = [(text, c)
-                      for msg, c in last_msgs
-                      for text in textwrap.wrap(msg, w)]
         _y = y
-        for text, colour in last_lines[-h:]:  # take last h lines
+        for text, colour in last_msgs[-h:]:  # take last h lines
             ltc.console_set_default_foreground(con, colour)
-            ltc.console_print_ex(con, x, _y, ltc.BKGND_NONE, ltc.LEFT, text)
+            guiutils.dotext(con, x, _y, text)
             _y += 1
+
 
 # global message log
 msg_log = MessageLog()

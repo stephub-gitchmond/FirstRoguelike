@@ -1,6 +1,5 @@
 import rlmobs
 import rlutils
-import rlmsglog
 from attrs.ai import *
 from attrs.bg import *
 from attrs.fg import *
@@ -71,11 +70,11 @@ def pickup_item(player, leveldata):
             item = items[0]
             success, msg = player.inventory.add(item)
 
-            if success:
-                rlmsglog.m('Picked up ' + item.name)
-                leveldata.objects.remove(item)
-            elif msg:
+            if msg and len(msg) > 0:
                 rlmsglog.m(msg)
+
+            if success:
+                leveldata.objects.remove(item)
 
 
 def player_death(player, leveldata):

@@ -1,4 +1,4 @@
-import src.rlmsglog
+import src.rlmsglog as rlmsglog
 from src.attrs.attrs import Attr
 
 
@@ -40,10 +40,10 @@ class Fighter(Attr):
         if target.fighter:
             damage = self.power - target.fighter.defence
             if damage > 0:
-                src.rlmsglog.m(owner.name + ' attacks ' + target.name + ' for ' + str(damage) + ' damage')
+                rlmsglog.m(owner.name + ' attacks ' + target.name + ' for ' + str(damage) + ' damage')
                 target.fighter.take_damage(target, damage, leveldata)
             else:
-                src.rlmsglog.m(owner.name + ' attacks ' + target.name + ' but does no damage')
+                rlmsglog.m(owner.name + ' attacks ' + target.name + ' but does no damage')
 
     def is_alive(self):
         return self.hp > 0
