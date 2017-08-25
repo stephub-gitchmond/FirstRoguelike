@@ -27,6 +27,7 @@ class Object(object):
         # Cons: - waste of memory
         self.fg = fg
         self.bg = bg
+        self.descriptor = None
         self.fighter = None
         self.ai = None
         self.inventory = None
@@ -54,3 +55,6 @@ class Object(object):
     def take_turn(self, leveldata):
         if self.ai:
             self.ai.take_turn(self, leveldata)
+
+    def description(self):
+        return self.descriptor.describe(self) if self.descriptor else self.name

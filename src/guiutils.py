@@ -76,7 +76,7 @@ def draw_menu(con, header, options, w, screen_w, screen_h):
 
 
 def draw_inventory_menu(con, player, w, screen_w, screen_h):
-    options = [item.name for item in player.inventory.itemlist]
+    options = [item.description() for item in player.inventory.itemlist]
     header = 'Inventory:' if len(options) > 0 else 'Inventory is empty'
 
     draw_menu(con, header, options, w, screen_w, screen_h)

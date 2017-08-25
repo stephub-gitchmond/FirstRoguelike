@@ -1,7 +1,7 @@
 import rlutils
+from attrs.carryable import *
 from attrs.fg import *
 from attrs.usable import *
-from attrs.carryable import *
 from libtcod import libtcodpy as ltc
 
 MAX_ROOM_ITEMS = 2
