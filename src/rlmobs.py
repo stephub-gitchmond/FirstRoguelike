@@ -1,17 +1,20 @@
 import rlutils
-from libtcod import libtcodpy as ltc
 from attrs import *
 
 MAX_ROOM_ENEMIES = 3
+
+# use a single copy of stateless attributes
+basic_monster_ai = BasicMonsterAI()
+wound_indicator_bg = WoundIndicatorBg()
 
 
 def create_goblin(x, y):
     g = rlutils.Object('Goblin',
                        x, y,
                        BasicFg('g', ltc.dark_green),
-                       WoundIndicatorBg())
-    g.fighter = g.owns(Fighter(max_hp=10, defence=0, power=3, death_func=mob_death))
-    g.ai = g.owns(BasicMonsterAI())
+                       wound_indicator_bg)
+    g.fighter = Fighter(max_hp=10, defence=0, power=3, death_func=mob_death)
+    g.ai = basic_monster_ai
     return g
 
 
@@ -19,9 +22,9 @@ def create_troll(x, y):
     t = rlutils.Object('Troll',
                        x, y,
                        BasicFg('T', ltc.dark_green),
-                       WoundIndicatorBg())
-    t.fighter = t.owns(Fighter(max_hp=16, defence=1, power=4, death_func=mob_death))
-    t.ai = t.owns(BasicMonsterAI())
+                       wound_indicator_bg)
+    t.fighter = Fighter(max_hp=16, defence=1, power=4, death_func=mob_death)
+    t.ai = basic_monster_ai
     return t
 
 
@@ -33,6 +36,7 @@ def create_corpse(mob):
 
 
 def mob_death(mob, leveldata):
+    """ Removes mob from game and replaces it with a corpse """
     if mob in leveldata.objects:
         corpse = create_corpse(mob)
         leveldata.objects.remove(mob)

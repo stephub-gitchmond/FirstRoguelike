@@ -10,7 +10,7 @@ def create_healing_potion(x, y):
                         x, y,
                         attrs.BasicFg('!', ltc.violet),
                         blocks=False)
-    hp.item = hp.owns(attrs.Item())
+    hp.item = attrs.Item()
     return hp
 
 

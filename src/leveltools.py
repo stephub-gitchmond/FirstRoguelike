@@ -13,12 +13,12 @@ MAX_ROOMS = 30
 
 
 class LevelData:
-    def __init__(self, w, h, level, rooms, objects=[], player=None):
+    def __init__(self, w, h, level, rooms, objects=None, player=None):
         self.w = w
         self.h = h
         self.level = level
         self.rooms = rooms
-        self.objects = objects
+        self.objects = objects if objects else []
         self.player = player
 
         self.fov_map = ltc.map_new(w, h)

@@ -57,7 +57,7 @@ def move_or_attack(player, leveldata, dx, dy):
             player.y += dy
     else:
         # attack target
-        player.fighter.attack(attackables[0], leveldata)
+        player.fighter.attack(player, attackables[0], leveldata)
 
 
 def pickup_item(player, leveldata):
@@ -86,7 +86,7 @@ def create_player(x, y):
                        x, y,
                        attrs.BasicFg('@', ltc.white),
                        attrs.WoundIndicatorBg())
-    p.fighter = p.owns(attrs.Fighter(max_hp=30, defence=2, power=5, death_func=player_death))
-    p.ai = p.owns(attrs.PlayerAI())
-    p.inventory = p.owns(attrs.Inventory())
+    p.fighter = attrs.Fighter(max_hp=30, defence=2, power=5, death_func=player_death)
+    p.ai = attrs.PlayerAI()
+    p.inventory = attrs.Inventory()
     return p

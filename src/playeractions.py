@@ -5,7 +5,8 @@ class Action(object):
     def __init__(self, actor):
         self.actor = actor
 
-    def key(self):
+    @staticmethod
+    def key():
         return None
 
     def is_valid(self, leveldata):
@@ -40,7 +41,7 @@ class MoveOrAttack(Action):
 
     def invoke(self, leveldata):
         if self.action == 'attack':
-            self.actor.fighter.attack(self.target)
+            self.actor.fighter.attack(self.actor, self.target, leveldata)
         elif self.action == 'move':
             self.actor.x = self.tx
             self.actor.y = self.ty

@@ -21,7 +21,7 @@ def handle_input(key, mouse, game_state, leveldata, con):
         ltc.console_set_fullscreen(not ltc.console_is_fullscreen())
         return False
 
-    elif key.vk == ltc.KEY_F4 and key.alt:
+    elif key.vk == ltc.KEY_F4 and key.lalt:
         # exit
         global should_exit
         should_exit = True
