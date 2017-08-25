@@ -48,8 +48,7 @@ def move_or_attack(player, leveldata, dx, dy):
     y = player.y + dy
 
     # get an attackable object on target tile
-    objs = leveldata.get_objects(x, y)
-    attackables = list(filter(lambda o: o.fighter is not None, objs))
+    attackables = [o for o in leveldata.get_objects(x, y) if o.fighter]
 
     if len(attackables) == 0:
         # move to target
