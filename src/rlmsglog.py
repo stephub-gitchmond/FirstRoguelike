@@ -13,11 +13,11 @@ class MessageLog(object):
 
     def draw_log(self, con, x, y, w, h):
         last_msgs = self.msgs[-h:]  # last h messages
-        _y = y
-        for text, colour in last_msgs[-h:]:  # take last h lines
-            ltc.console_set_default_foreground(con, colour)
-            guiutils.dotext(con, x, _y, text)
-            _y += 1
+        for i, (text, colour) in enumerate(last_msgs):
+            # the latest message is white, the rest are grey
+            col = ltc.white if i == len(last_msgs) - 1 else ltc.grey
+
+            guiutils.dotext(con, x, y + i, text, fg=col)
 
 
 # global message log

@@ -110,7 +110,14 @@ __ltc_colour_codes__ = [ltc.COLCTRL_1,
                         ltc.COLCTRL_5]
 
 
-def dotext(con, x, y, text, fg=ltc.white, bg=ltc.black, flag=ltc.BKGND_NONE, align=ltc.LEFT):
+def dotext(con, x, y, text, fg=ltc.white, bg=None, flag=None, align=ltc.LEFT):
+
+    if not flag:
+        flag = ltc.BKGND_SET if bg else ltc.BKGND_NONE
+
+    if not bg:
+        bg = ltc.black
+
     if '$' in text:
         # do colour replacement\
         text = text.replace(colctr_stop, chr(ltc.COLCTRL_STOP))
