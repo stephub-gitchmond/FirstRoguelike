@@ -1,20 +1,11 @@
 import rlutils
 from attrs.carryable import *
+from attrs.descriptor import *
 from attrs.fg import *
 from attrs.usable import *
 from libtcod import libtcodpy as ltc
 
 MAX_ROOM_ITEMS = 2
-
-
-def create_healing_potion(x, y):
-    hp = rlutils.Object('Healing Potion',
-                        x, y,
-                        BasicFg('!', ltc.violet),
-                        blocks=False)
-    hp.usable = HealingPotion()
-    hp.carryable = Carryable()
-    return hp
 
 
 def populate_items(leveldata):
@@ -25,3 +16,14 @@ def populate_items(leveldata):
             if leveldata.is_passable(x, y):
                 item = create_healing_potion(x, y)
                 leveldata.objects.append(item)
+
+
+def create_healing_potion(x, y):
+    hp = rlutils.Object('Healing Potion',
+                        x, y,
+                        BasicFg('!', ltc.violet),
+                        blocks=False)
+    hp.usable = Healer(healamount=ltc.random_get_int(0, 5, 15))
+    hp.carryable = Carryable()
+    hp.descriptor = Descriptor(lambda o: o.name + " +" + str(o.usable.healamount))
+    return hp

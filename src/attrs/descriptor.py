@@ -2,5 +2,8 @@ from attrs import *
 
 
 class Descriptor(Attr):
+    def __init__(self, func):
+        self.func = func
+
     def describe(self, owner):
-        raise NotImplemented()
+        return self.func(owner)

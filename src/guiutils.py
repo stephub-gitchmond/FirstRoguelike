@@ -1,5 +1,6 @@
 from libtcod import libtcodpy as ltc
 
+
 def draw_bar(con, x, y, total_width, name, value, maximum, bar_color, back_color):
     # render a bar (HP, experience, etc). First calculate the width of the bar
     bar_width = int(float(value) / maximum * total_width)
@@ -88,6 +89,7 @@ colctr_orange = '$orange$'
 colctr_blue = '$blue$'
 colctr_green = '$green$'
 colctr_purple = '$purple$'
+colctr_violet = '$violet$'
 
 colctr_stop = '$stop$'
 colctr_fg = '$fg$'
@@ -98,7 +100,8 @@ __colours__ = {colctr_grey: ltc.grey,
                colctr_orange: ltc.orange,
                colctr_blue: ltc.blue,
                colctr_green: ltc.green,
-               colctr_purple: ltc.purple}
+               colctr_purple: ltc.purple,
+               colctr_violet: ltc.violet}
 
 __ltc_colour_codes__ = [ltc.COLCTRL_1,
                         ltc.COLCTRL_2,

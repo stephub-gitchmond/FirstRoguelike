@@ -9,11 +9,11 @@ class Inventory(object):
         """ Add and rlutils.Object to this inventory.
         Returns success flag and message """
         if not obj.carryable:
-            return False, "Can't pick up " + obj.name
+            return False, "Can't pick up " + obj.description()
         if len(self.itemlist) >= 26:
             return False, '$orange$Inventory full!$stop$'
         self.itemlist.append(obj)
-        return True, 'Picked up ' + obj.name
+        return True, 'Picked up ' + obj.description()
 
     def remove(self, obj):
         if self.has(obj):
