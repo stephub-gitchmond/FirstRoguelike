@@ -7,7 +7,8 @@ class Usable(object):
     def use(self, owner, leveldata, user):
         """
         Uses the item.
-        Returns True if the item was succesfully used, and a message describing what happened """
+        Returns boolean saying if item was successfully used
+        and a message describing what happened """
         return False, "The " + owner.name + "doesn't do anything... yet"
 
 
@@ -26,4 +27,4 @@ class Healer(Usable):
         user.fighter.hp += self.healamount
         user.inventory.remove(owner)
 
-        return 'True', "$green$You wounds start to close$stop$"
+        return 'True', "$green$Your wounds start to close$stop$"

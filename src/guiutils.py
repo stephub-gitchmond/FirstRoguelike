@@ -74,13 +74,18 @@ def draw_menu(con, header, options, w, screen_w, screen_h):
     # show menu and wait for player choice
     ltc.console_flush()
     key = ltc.console_wait_for_keypress(True)
+    index = key.c - ord('a')
+    return index if 0 <= index < len(options) else None
 
 
 def draw_inventory_menu(con, player, w, screen_w, screen_h):
     options = [item.description() for item in player.inventory.itemlist]
     header = 'Inventory:' if len(options) > 0 else 'Inventory is empty'
 
-    draw_menu(con, header, options, w, screen_w, screen_h)
+    index = draw_menu(con, header, options, w, screen_w, screen_h)
+    if index is None:
+        return None
+    return player.inventory.itemlist[index]
 
 
 colctr_grey = '$grey$'
@@ -111,7 +116,6 @@ __ltc_colour_codes__ = [ltc.COLCTRL_1,
 
 
 def dotext(con, x, y, text, fg=ltc.white, bg=None, flag=None, align=ltc.LEFT):
-
     if not flag:
         flag = ltc.BKGND_SET if bg else ltc.BKGND_NONE
 

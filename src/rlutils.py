@@ -25,12 +25,18 @@ class Object(object):
         #       - PyCharm hinting detects it and enable autocomplete
         #
         # Cons: - waste of memory
+
+        # visual attributes
         self.fg = fg
         self.bg = bg
         self.descriptor = None
+
+        # actor attributes
         self.fighter = None
         self.ai = None
         self.inventory = None
+
+        # item attributes
         self.carryable = None
         self.usable = None
 
