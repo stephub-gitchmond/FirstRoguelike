@@ -1,4 +1,5 @@
 from libtcod import libtcodpy as ltc
+from attrs import ai
 
 
 class Object(object):
@@ -64,3 +65,28 @@ class Object(object):
 
     def description(self):
         return self.descriptor.describe(self) if self.descriptor else self.name
+
+
+def distsq(x1, y1, x2, y2):
+    return (x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2)
+
+
+def closest_hostile(subject, leveldata, fov_map=None):
+    """ Returns the closest hostile creature, and the square of the distance """
+
+    hostiles = [o for o in leveldata.objects
+                if o.ai and o.ai.attitude_towards(subject, leveldata) is ai.ATTITUDE_HOSTILE]
+
+    if fov_map:
+        hostiles = [o for o in hostiles if ltc.map_is_in_fov(fov_map, o.x, o.y)]
+
+    min_dist_sq = None
+    closest = None
+
+    for h in hostiles:
+        dist_sq = distsq(subject.x, subject.y, h.x, h.y)
+        if min_dist_sq is None or min_dist_sq > dist_sq:
+            min_dist_sq = dist_sq
+            closest = h
+
+    return closest, min_dist_sq

@@ -1,12 +1,19 @@
 import src.rlplayer
 from src.attrs.attrs import Attr
 
+ATTITUDE_HOSTILE = "hostile"
+ATTITUDE_FRIENDLY = "friendly"
+ATTITUDE_NA = "n/a"
+
 
 class AI(Attr):
     def __init__(self):
         Attr.__init__(self)
 
     def take_turn(self, owner, leveldata):
+        pass
+
+    def attitude_towards(self, target, leveldata):
         pass
 
 
@@ -42,6 +49,10 @@ class BasicMonsterAI(AI):
             elif leveldata.is_passable(new_x, new_y):
                 owner.x = new_x
                 owner.y = new_y
+
+    def attitude_towards(self, target, leveldata):
+        """ Only hostile towards player """
+        return ATTITUDE_HOSTILE if target == leveldata.player else ATTITUDE_FRIENDLY
 
 
 class PlayerAI(AI):
