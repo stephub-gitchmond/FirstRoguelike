@@ -1,6 +1,6 @@
 from libtcod import libtcodpy as ltc
-from items import healingpotion
-from items import lightingscroll
+from items import potionhealing
+from items import scrolllightning
 
 MAX_ROOM_ITEMS = 2
 
@@ -18,6 +18,6 @@ def populate_items(leveldata):
 def random_item(x, y):
     dice = ltc.random_get_int(0, 0, 100)
     if dice < 70:
-        return healingpotion.create(x, y)
+        return potionhealing.create(x, y)
     else:
-        return lightingscroll.create(x, y)
+        return scrolllightning.create(x, y)
