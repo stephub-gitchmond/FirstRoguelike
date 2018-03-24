@@ -3,8 +3,9 @@ from src.attrs.descriptor import Descriptor
 from src.attrs.fg import BasicFg
 from src.attrs.usable import Usable
 from src.libtcod import libtcodpy as ltc
-from src.rlutils import Object
 from src.rlmsglog import m
+from src.rlutils import Object
+
 
 def create(x, y):
     hp = Object('Healing Potion',

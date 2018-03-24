@@ -1,6 +1,7 @@
 from attrs import *
 from src.rlmsglog import m
 
+
 class Usable(Attr):
     """ Represents an item that can be used by the player """
 
