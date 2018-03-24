@@ -1,6 +1,7 @@
-from libtcod import libtcodpy as ltc
 from items import potionhealing
+from items import scrollconfusion
 from items import scrolllightning
+from libtcod import libtcodpy as ltc
 
 MAX_ROOM_ITEMS = 2
 
@@ -15,9 +16,18 @@ def populate_items(leveldata):
                 leveldata.objects.append(item)
 
 
+# weighted drop chances for items
+choices = {potionhealing.create: 7,
+           scrolllightning.create: 3,
+           scrollconfusion.create: 5}
+
+
 def random_item(x, y):
-    dice = ltc.random_get_int(0, 0, 100)
-    if dice < 70:
-        return potionhealing.create(x, y)
-    else:
-        return scrolllightning.create(x, y)
+    total = sum(choices.values())
+    r = ltc.random_get_int(0, 0, total)
+    upto = 0
+    for c, w in choices.iteritems():
+        if upto + w >= r:
+            return c(x, y)
+        upto += w
+    assert False, "Failed to pick random item"
