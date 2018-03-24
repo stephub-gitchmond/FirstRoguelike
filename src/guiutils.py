@@ -100,6 +100,7 @@ colctr_stop = '$stop$'
 colctr_fg = '$fg$'
 colctr_bg = '$bg$'
 
+# dict of colour controls to libtcod colours
 __colours__ = {colctr_grey: ltc.grey,
                colctr_red: ltc.red,
                colctr_orange: ltc.orange,
@@ -122,18 +123,23 @@ def dotext(con, x, y, text, fg=ltc.white, bg=None, flag=None, align=ltc.LEFT):
     if not bg:
         bg = ltc.black
 
+    # if there are any colour coded in the text, replace them with the libtcod colour chars
     if '$' in text:
-        # do colour replacement\
+        # replace common colour codes
         text = text.replace(colctr_stop, chr(ltc.COLCTRL_STOP))
         text = text.replace(colctr_fg, chr(ltc.COLCTRL_FORE_RGB))
         text = text.replace(colctr_bg, chr(ltc.COLCTRL_BACK_RGB))
 
+        # note that libtcod can only handle 5 colour codes in the same print operation
         i = 1
         for code, colour in __colours__.iteritems():
             if code in text:
                 if i > 5:
+                    # too many colour codes, just remove the control sequences
                     text = text.replace(code, '')
                 else:
+                    # replace the control sequence with the libtcod code
+                    # and assign the correct colour to the libtcod code
                     ltc_code = __ltc_colour_codes__[i]
                     text = text.replace(code, chr(ltc_code))
                     ltc.console_set_color_control(ltc_code, colour, bg)
