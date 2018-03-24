@@ -62,3 +62,33 @@ class PlayerAI(AI):
 
     def take_turn(self, owner, leveldata):
         src.rlplayer.handle_player_action(owner, leveldata)
+
+
+class TempAI(AI):
+    """ This AI handles temporarily replacing an objects AI with a different one, for a specified number of turns. """
+
+    def __init__(self, tempai, duration, finishfunc=None):
+        AI.__init__(self)
+        self.prevai = None
+        self.tempai = tempai
+        self.duration = duration
+        self.finishfunc = finishfunc
+
+    def add_to(self, newowner):
+        """ Call this to add the temporary AI to an object """
+        self.prevai = newowner.ai
+        newowner.ai = self
+
+    def take_turn(self, owner, leveldata):
+        # delegate action to the temporary AI
+        self.tempai.take_turn(owner, leveldata)
+
+        # reduce the remaining time by one turn
+        self.duration -= 1
+
+        # restore the previous AI if necessary
+        if self.duration <= 0:
+            owner.ai = self.prevai
+
+            if self.finishfunc:
+                self.finishfunc(owner, leveldata)

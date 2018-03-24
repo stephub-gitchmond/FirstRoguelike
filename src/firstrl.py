@@ -34,8 +34,7 @@ def handle_input(key, mouse, game_state, leveldata, con):
                                             SCREEN_WIDTH, SCREEN_HEIGHT)
         # todo move this logic somewhere more appropriate
         if item and item.usable:
-            _, msg = item.usable.use(item, leveldata, leveldata.player)
-            src.rlmsglog.m(msg)
+            item.usable.use(item, leveldata, leveldata.player)
 
     elif game_state is GS_PLAYING:
         # otherwise, player takes an action

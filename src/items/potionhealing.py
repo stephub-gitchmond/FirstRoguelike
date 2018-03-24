@@ -4,7 +4,7 @@ from src.attrs.fg import BasicFg
 from src.attrs.usable import Usable
 from src.libtcod import libtcodpy as ltc
 from src.rlutils import Object
-
+from src.rlmsglog import m
 
 def create(x, y):
     hp = Object('Healing Potion',
@@ -24,12 +24,14 @@ class Healer(Usable):
 
     def use(self, owner, leveldata, user, target=None):
         if not user.fighter:
-            return False, "You can't use a " + owner.name + " if you have no health"
+            m("You can't use a " + owner.name + " if you have no health")
+            return
 
         if user.fighter.is_at_max_health():
-            return False, "Can't heal, already at full health"
+            m("Can't heal, already at full health")
+            return
 
         user.fighter.hp += self.healamount
         user.inventory.remove(owner)
 
-        return 'True', "$green$Your wounds start to close$stop$"
+        m("$green$Your wounds start to close$stop$")
