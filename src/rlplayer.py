@@ -6,6 +6,7 @@ from attrs.fg import *
 from attrs.fighter import *
 from attrs.inventory import *
 from libtcod import libtcodpy as ltc
+from src.attrs.movable import MovableCreature
 
 pas = {ltc.KEY_UP: 'PA_UP',
        ltc.KEY_DOWN: 'PA_DOWN',
@@ -89,4 +90,5 @@ def create_player(x, y):
     p.fighter = Fighter(max_hp=30, defence=2, power=5, death_func=player_death)
     p.ai = PlayerAI()
     p.inventory = Inventory()
+    p.movable = MovableCreature()
     return p

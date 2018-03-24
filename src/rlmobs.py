@@ -3,6 +3,7 @@ from attrs.ai import *
 from attrs.bg import *
 from attrs.fg import *
 from attrs.fighter import *
+from src.attrs.movable import MovableCreature
 
 MAX_ROOM_ENEMIES = 3
 
@@ -18,6 +19,7 @@ def create_goblin(x, y):
                        wound_indicator_bg)
     g.fighter = Fighter(max_hp=10, defence=0, power=3, death_func=mob_death)
     g.ai = basic_monster_ai
+    g.movable = MovableCreature()
     return g
 
 
@@ -28,6 +30,7 @@ def create_troll(x, y):
                        wound_indicator_bg)
     t.fighter = Fighter(max_hp=16, defence=1, power=4, death_func=mob_death)
     t.ai = basic_monster_ai
+    t.movable = MovableCreature()
     return t
 
 

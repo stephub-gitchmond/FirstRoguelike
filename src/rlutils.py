@@ -36,6 +36,7 @@ class Object(object):
         self.fighter = None
         self.ai = None
         self.inventory = None
+        self.movable = None
 
         # item attributes
         self.carryable = None
