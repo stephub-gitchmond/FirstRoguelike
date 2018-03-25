@@ -31,7 +31,7 @@ class LightningItem(Usable):
             return
 
         if not target.fighter:
-            m("A lightning bolt strikes forth, but has no effect")
+            m("$blue$A lightning bolt strikes forth, but has no effect$stop$")
             return
 
         target.fighter.take_damage(target, self.damage, leveldata)
@@ -39,5 +39,5 @@ class LightningItem(Usable):
         if user.inventory:
             user.inventory.remove(owner)
 
-        m("$blue$A lightning bolt strikes forth, dealing " + str(
-            self.damage) + " damage to the " + target.name + "!$stop$")
+        m("$blue$A lightning bolt strikes forth,$stop$")
+        m("$blue$dealing " + str(self.damage) + " damage to the " + target.name + "!$stop$")

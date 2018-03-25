@@ -104,7 +104,7 @@ colctr_bg = '$bg$'
 __colours__ = {colctr_grey: ltc.grey,
                colctr_red: ltc.red,
                colctr_orange: ltc.orange,
-               colctr_blue: ltc.blue,
+               colctr_blue: ltc.light_blue,
                colctr_green: ltc.green,
                colctr_purple: ltc.purple,
                colctr_violet: ltc.violet}
